@@ -11,7 +11,7 @@ module OpenamErrbit
       end
 
       def self.update_openam_user(token, hash)
-        if user = where({username: hash.fetch('uid'){raise 'uid key is missing'}.first}).first
+        if user = where({email: hash.fetch('mail'){raise 'email is missing'}.first}).first
           user.update_attribute(:token, token)
         else
           user = self.new(openam_user_hash(hash, token))
